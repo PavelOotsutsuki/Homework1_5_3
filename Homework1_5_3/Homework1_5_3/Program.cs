@@ -10,6 +10,9 @@ namespace Homework1_5_3
 {
     class Program
     {
+        const string caseSum = "sum";
+        const string caseExit = "exit";
+
         static void Main(string[] args)
         {
             List<int> list = new List<int>();
@@ -35,13 +38,9 @@ namespace Homework1_5_3
 
         static void EnterNumbers (ref List <int> list, ref bool isWork)
         {
-            string enter;
-            int number;
-            bool isNumber;
-
             Console.Write("Введите число: ");
-            enter = Console.ReadLine();
-            isNumber = int.TryParse(enter, out number);
+            string enter = Console.ReadLine();
+            bool isNumber = int.TryParse(enter, out int number);
 
             if (isNumber)
             {
@@ -55,21 +54,10 @@ namespace Homework1_5_3
 
         static void ExecuteCommand (List <int> list, string command, ref bool isWork)
         {
-            const string caseSum = "sum";
-            const string caseExit = "exit";
-            int sum;
-
             switch (command)
             {
                 case caseSum:
-                    sum = 0;
-
-                    foreach (var listNumber in list)
-                    {
-                        sum += listNumber;
-                    }
-
-                    Console.WriteLine("Сумма введеных чисел – " + sum);
+                    SumNumbers(list);
                     break;
                 case caseExit:
                     isWork = false;
@@ -80,6 +68,18 @@ namespace Homework1_5_3
             }
         }
 
+        static void SumNumbers(List<int> list)
+        {
+            int sum = 0;
+
+            foreach (var listNumber in list)
+            {
+                sum += listNumber;
+            }
+
+            Console.WriteLine("Сумма введеных чисел – " + sum);
+        }
+
         static void ExecuteInputNumber(ref List<int> list, int number)
         {
             list.Add(number);
@@ -88,9 +88,6 @@ namespace Homework1_5_3
 
         static void PrintMenu()
         {
-            const string caseSum = "sum";
-            const string caseExit = "exit";
-
             Console.WriteLine(caseSum + " - вывести сумму введенных чисел");
             Console.WriteLine(caseExit + " - выйти из программы");
             Console.WriteLine();
