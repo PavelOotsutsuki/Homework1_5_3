@@ -10,8 +10,8 @@ namespace Homework1_5_3
 {
     class Program
     {
-        const string caseSum = "sum";
-        const string caseExit = "exit";
+        const string CaseSum = "sum";
+        const string CaseExit = "exit";
 
         static void Main(string[] args)
         {
@@ -44,27 +44,23 @@ namespace Homework1_5_3
 
             if (isNumber)
             {
-                ExecuteInputNumber(ref list, number);
+                list.Add(number);
+                Console.WriteLine("Число добавлено");
             }
             else
             {
-                ExecuteCommand(list, enter.ToLower(), ref isWork);
-            }
-        }
-
-        static void ExecuteCommand (List <int> list, string command, ref bool isWork)
-        {
-            switch (command)
-            {
-                case caseSum:
-                    SumNumbers(list);
-                    break;
-                case caseExit:
-                    isWork = false;
-                    break;
-                default:
-                    Console.WriteLine("Введено неверное значение");
-                    break;
+                switch (enter)
+                {
+                    case CaseSum:
+                        SumNumbers(list);
+                        break;
+                    case CaseExit:
+                        isWork = false;
+                        break;
+                    default:
+                        Console.WriteLine("Введено неверное значение");
+                        break;
+                }
             }
         }
 
@@ -80,16 +76,10 @@ namespace Homework1_5_3
             Console.WriteLine("Сумма введеных чисел – " + sum);
         }
 
-        static void ExecuteInputNumber(ref List<int> list, int number)
-        {
-            list.Add(number);
-            Console.WriteLine("Число добавлено");
-        }
-
         static void PrintMenu()
         {
-            Console.WriteLine(caseSum + " - вывести сумму введенных чисел");
-            Console.WriteLine(caseExit + " - выйти из программы");
+            Console.WriteLine(CaseSum + " - вывести сумму введенных чисел");
+            Console.WriteLine(CaseExit + " - выйти из программы");
             Console.WriteLine();
         }
     }
