@@ -31,15 +31,32 @@ namespace Homework1_5_3
             {
                 Console.Clear();
                 PrintMenu();
-                EnterNumbers(ref list, ref isWork);
+                ExecuteCommands(ref list, ref isWork);
                 Console.ReadKey();
             }
         }
 
-        static void EnterNumbers (ref List <int> list, ref bool isWork)
+        static void ExecuteCommands (ref List <int> list, ref bool isWork)
         {
             Console.Write("Введите число: ");
             string enter = Console.ReadLine();
+
+            switch (enter)
+            {
+                case CaseSum:
+                    SumNumbers(list);
+                    break;
+                case CaseExit:
+                    isWork = false;
+                    break;
+                default:
+                    AddNumber(ref list, enter);
+                    break;
+            }
+        }
+
+        static void AddNumber(ref List <int> list, string enter)
+        {
             bool isNumber = int.TryParse(enter, out int number);
 
             if (isNumber)
@@ -49,18 +66,7 @@ namespace Homework1_5_3
             }
             else
             {
-                switch (enter)
-                {
-                    case CaseSum:
-                        SumNumbers(list);
-                        break;
-                    case CaseExit:
-                        isWork = false;
-                        break;
-                    default:
-                        Console.WriteLine("Введено неверное значение");
-                        break;
-                }
+                Console.WriteLine("Введено неверное значение");
             }
         }
 
