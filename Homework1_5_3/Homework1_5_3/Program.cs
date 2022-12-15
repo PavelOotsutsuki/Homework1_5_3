@@ -15,53 +15,44 @@ namespace Homework1_5_3
 
         static void Main(string[] args)
         {
-            List<int> list = new List<int>();
+            List<int> numbers = new List<int>();
 
-            Work(list);
-
-            Console.Write("Для продолжения нажмите любую кнопку...");
-            Console.ReadKey();
-        }
-
-        static void Work(List<int> list)
-        {
             bool isWork = true;
 
             while (isWork)
             {
                 Console.Clear();
                 PrintMenu();
-                ExecuteCommands(ref list, ref isWork);
+                Console.Write("Введите число: ");
+                string userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case CaseSum:
+                        SumNumbers(numbers);
+                        break;
+                    case CaseExit:
+                        isWork = false;
+                        break;
+                    default:
+                        AddNumber(numbers, userInput);
+                        break;
+                }
+                
                 Console.ReadKey();
             }
+
+            Console.Write("Для продолжения нажмите любую кнопку...");
+            Console.ReadKey();
         }
 
-        static void ExecuteCommands (ref List <int> list, ref bool isWork)
+        static void AddNumber(List <int> numbers, string userInput)
         {
-            Console.Write("Введите число: ");
-            string enter = Console.ReadLine();
-
-            switch (enter)
-            {
-                case CaseSum:
-                    SumNumbers(list);
-                    break;
-                case CaseExit:
-                    isWork = false;
-                    break;
-                default:
-                    AddNumber(ref list, enter);
-                    break;
-            }
-        }
-
-        static void AddNumber(ref List <int> list, string enter)
-        {
-            bool isNumber = int.TryParse(enter, out int number);
+            bool isNumber = int.TryParse(userInput, out int number);
 
             if (isNumber)
             {
-                list.Add(number);
+                numbers.Add(number);
                 Console.WriteLine("Число добавлено");
             }
             else
@@ -70,11 +61,11 @@ namespace Homework1_5_3
             }
         }
 
-        static void SumNumbers(List<int> list)
+        static void SumNumbers(List<int> numbers)
         {
             int sum = 0;
 
-            foreach (var listNumber in list)
+            foreach (var listNumber in numbers)
             {
                 sum += listNumber;
             }
